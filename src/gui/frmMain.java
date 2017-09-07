@@ -1,16 +1,22 @@
 package gui;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import clases.numeros;
+
 import java.awt.Component;
 
 public class frmMain extends JFrame {
@@ -25,7 +31,7 @@ public class frmMain extends JFrame {
 					frmMain frame = new frmMain();
 					frame.setBounds(100, 100, 491, 544);
 					frame.setLocationRelativeTo(null);
-					frame.setTitle("Anti------------ Calculadora");
+					frame.setTitle("Anti Calculadora");
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
@@ -105,5 +111,7 @@ public class frmMain extends JFrame {
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setBounds(156, 278, 108, 40);
 		Panel1.add(btnCalcular);
+		numeros n= new numeros();
+		lblNumero.setText("Numero: " + n.get_numero());
 	}
 }
