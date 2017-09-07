@@ -9,7 +9,7 @@ public class numeros
 	{
 		double rndNum = new Random().nextDouble();
 		
-		_numero=rndNum * (100);
+		_numero=Math.round(rndNum * (100)*100)/100;;
 	}
 
 	public double get_numero() 

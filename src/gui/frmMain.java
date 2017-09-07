@@ -111,7 +111,11 @@ public class frmMain extends JFrame {
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setBounds(156, 278, 108, 40);
 		Panel1.add(btnCalcular);
+		lblNumero.setText("Numero: " +generarNumero() );
+	}
+
+	private double generarNumero() {
 		numeros n= new numeros();
-		lblNumero.setText("Numero: " + n.get_numero());
+		return n.get_numero();
 	}
 }
