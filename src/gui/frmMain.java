@@ -45,14 +45,7 @@ public class frmMain extends JFrame {
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
-					try {
-						UIManager
-								.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-					} catch (ClassNotFoundException | InstantiationException
-							| IllegalAccessException
-							| UnsupportedLookAndFeelException e1) {
-						e1.printStackTrace();
-					}
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,6 +58,14 @@ public class frmMain extends JFrame {
 	 * Create the frame.
 	 */
 	public frmMain() {
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException
+				| UnsupportedLookAndFeelException e1) {
+			e1.printStackTrace();
+		}
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 444, 443);
