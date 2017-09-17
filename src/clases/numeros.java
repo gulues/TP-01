@@ -3,16 +3,16 @@ import java.util.Random;
 
 public class numeros 
 {
-	private double _numero;
+	private int _numero;
 	
 	public numeros() 
 	{
 		double rndNum = new Random().nextDouble();
 		
-		_numero=Math.round(rndNum * (100)*100)/100;;
+		_numero=(int) (Math.round(rndNum * (100)*100)/100);
 	}
 
-	public double get_numero() 
+	public int get_numero() 
 	{
 		return _numero;
 	}
