@@ -32,9 +32,10 @@ import java.util.ArrayList;
 public class frmMain extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static JLabel lblTiempo = new JLabel("tiempo: ");
+	public static JLabel lblTiempoActual = new JLabel("tiempo: ");
 	private JPanel Panel1;
 	private JTextField txtFormula;
-	private cronometro crono = new cronometro();
+	private cronometro cronoT = new cronometro();
 	private static int _puntos = 0;
 	String numRnd;
 	private static JLabel lblInfo = new JLabel();
@@ -53,7 +54,7 @@ public class frmMain extends JFrame {
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
-					
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -69,59 +70,82 @@ public class frmMain extends JFrame {
 
 		try {
 			UIManager
-					.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Panel1 = new JPanel();
+		Panel1.setBackground(Color.BLACK);
 		Panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Panel1);
 		Panel1.setLayout(null);
 		JLabel lblNumero = new JLabel("Numero: ");
 		lblNumero.setForeground(Color.RED);
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblNumero.setBounds(0, 28, 436, 30);
 		Panel1.add(lblNumero);
 
-		JLabel lblOperaciones = new JLabel("/");
-		lblOperaciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOperaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblOperaciones.setBounds(187, 132, 50, 35);
-		Panel1.add(lblOperaciones);
-		lblTiempo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTiempo.setBounds(0, 0, 143, 22);
-		Panel1.add(lblTiempo);
-
-		JLabel lblopDisponibles = new JLabel("Operaciones Disponibles");
-		lblopDisponibles.setHorizontalAlignment(SwingConstants.CENTER);
-		lblopDisponibles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblopDisponibles.setBounds(0, 91, 436, 30);
-		Panel1.add(lblopDisponibles);
-
-		lblInfo.setForeground(Color.RED);
-		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblInfo.setBounds(0, 299, 436, 22);
-		Panel1.add(lblInfo);
-
 		txtFormula = new JTextField();
+		lblPuntos.setText("Puntos:");
 
 		lblPuntos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuntos.setForeground(Color.RED);
-		lblPuntos.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblPuntos.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblPuntos.setBounds(0, 340, 436, 22);
 		Panel1.add(lblPuntos);
 		txtFormula.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtFormula.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFormula.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txtFormula.requestFocus();
+
+		JLabel lblOperaciones = new JLabel("/");
+		lblOperaciones.setForeground(Color.WHITE);
+		lblOperaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOperaciones.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblOperaciones.setBounds(187, 132, 50, 35);
+		Panel1.add(lblOperaciones);
+
+		JLabel lblTiempoTotal = new JLabel("Tiempo Total:");
+		lblTiempoTotal.setForeground(Color.WHITE);
+		lblTiempoTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempoTotal.setBounds(0, 0, 81, 22);
+		Panel1.add(lblTiempoTotal);
+		lblTiempo.setForeground(Color.WHITE);
+		lblTiempo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempo.setBounds(85, 0, 121, 22);
+		Panel1.add(lblTiempo);
+
+		JLabel lblopDisponibles = new JLabel("Operaciones Disponibles");
+		lblopDisponibles.setForeground(Color.WHITE);
+		lblopDisponibles.setHorizontalAlignment(SwingConstants.CENTER);
+		lblopDisponibles.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblopDisponibles.setBounds(2, 69, 436, 30);
+		Panel1.add(lblopDisponibles);
+
+		lblInfo.setForeground(Color.WHITE);
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblInfo.setBounds(0, 299, 436, 22);
+		Panel1.add(lblInfo);
+		lblTiempoActual.setForeground(Color.WHITE);
+
+		lblTiempoActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempoActual.setBounds(397, 0, 39, 22);
+		Panel1.add(lblTiempoActual);
+
+		JLabel lblTiempo_1 = new JLabel("Tiempo:");
+		lblTiempo_1.setForeground(Color.WHITE);
+		lblTiempo_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTiempo_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempo_1.setBounds(286, 0, 108, 22);
+		Panel1.add(lblTiempo_1);
 		txtFormula.setBounds(47, 184, 349, 40);
 		Panel1.add(txtFormula);
 		txtFormula.setColumns(10);
-		crono.setCero(true);
+		cronoT.setCero(true);
 		if (operaciones)
 			lblOperaciones.setText("/   -");
 		else
@@ -175,8 +199,8 @@ public class frmMain extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				frmLogros f = new frmLogros(lista);
 				f.pack();
-			    f.setLocationRelativeTo(null);
-			    f.setVisible(true);
+				f.setLocationRelativeTo(null);
+				f.setVisible(true);
 			}
 		});
 		btnLogros.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -213,7 +237,8 @@ public class frmMain extends JFrame {
 			jugador j = new jugador("", 0, 0);
 			lblInfo.setText(resultado);
 			if (numRnd.equals(resultado)) {
-				lblInfo.setText("Tu Resultado:" + resultado + " ¡Bien!");
+				lblInfo.setForeground(Color.GREEN);
+				lblInfo.setText("Resultado: " + resultado + " ¡ACERTASTE!");
 				_puntos++;
 				lblPuntos.setText("Puntos: " + _puntos);
 				txtFormula.setText("");
@@ -222,18 +247,18 @@ public class frmMain extends JFrame {
 				j.respuesta = Integer.parseInt(resultado);
 				j.tiempo = lblTiempo.getText();
 				lista.add(j);
+				cronoT.restart();
 
 			} else {
-				_puntos--;
-				lblInfo.setText("Tu Resultado:" + resultado
-						+ " La cuenta no dio");
+				lblInfo.setForeground(Color.RED);
+				lblInfo.setText("Resultado:" + resultado + " NO ACERTASTE!!");
 				lblPuntos.setText("Puntos: " + _puntos);
 				txtFormula.setText("");
 				j.numero = Integer.parseInt(numRnd);
 				j.respuesta = Integer.parseInt(resultado);
 				j.tiempo = lblTiempo.getText();
 				lista.add(j);
-
+				cronoT.restart();
 			}
 
 		} catch (Exception ex) {
@@ -243,6 +268,15 @@ public class frmMain extends JFrame {
 		}
 
 		return true;
+	}
+
+	public static void set_puntos(int _puntos) {
+		frmMain._puntos = _puntos;
+	}
+
+	public static void set_jugadores() {
+		frmMain.lista.clear();
+		;
 	}
 
 	private int generarNumero() {

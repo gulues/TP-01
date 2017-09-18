@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -25,7 +26,7 @@ public class frmLogros extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 
-	public frmLogros( ArrayList<jugador> lista) {
+	public frmLogros(ArrayList<jugador> lista) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		JScrollPane scrollTblJugadores = new JScrollPane();
@@ -39,35 +40,40 @@ public class frmLogros extends JDialog {
 		modeloJugadores.addColumn("Numero");
 		modeloJugadores.addColumn("Respuesta");
 		modeloJugadores.addColumn("Tiempo");
-		
-		tblJugadores = new JTable(modeloJugadores);
-		tblJugadores.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
-			private static final long serialVersionUID = -2865377489485540085L;
 
-			@Override
-            public Component getTableCellRendererComponent(JTable table,
-                    Object value, boolean isSelected, boolean hasFocus, int row, int col) {
-                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
-                String num1 = (String)table.getModel().getValueAt(row, 0);
-                String num2 = (String)table.getModel().getValueAt(row, 1);
-                if (num1.equals(num2)) {
-                    setBackground(Color.GREEN);
-                    setForeground(Color.BLACK);
-                } else {
-                	setBackground(Color.RED);
-                    setForeground(Color.WHITE);
-                }       
-                return this;
-            }   
-        });
+		tblJugadores = new JTable(modeloJugadores);
+		tblJugadores.setDefaultRenderer(Object.class,
+				new DefaultTableCellRenderer() {
+					private static final long serialVersionUID = -2865377489485540085L;
+
+					@Override
+					public Component getTableCellRendererComponent(
+							JTable table, Object value, boolean isSelected,
+							boolean hasFocus, int row, int col) {
+						super.getTableCellRendererComponent(table, value,
+								isSelected, hasFocus, row, col);
+						String num1 = (String) table.getModel().getValueAt(row,
+								0);
+						String num2 = (String) table.getModel().getValueAt(row,
+								1);
+						if (num1.equals(num2)) {
+							setBackground(Color.GREEN);
+							setForeground(Color.BLACK);
+						} else {
+							setBackground(Color.RED);
+							setForeground(Color.WHITE);
+						}
+						return this;
+					}
+				});
 
 		tblJugadores.setFillsViewportHeight(true);
 		scrollTblJugadores.setViewportView(tblJugadores);
 		// Deshabilitar edicion de tablas
-				for (int c = 0; c < tblJugadores.getColumnCount(); c++) {
-					Class<?> col_class = tblJugadores.getColumnClass(c);
-					tblJugadores.setDefaultEditor(col_class, null); // remove editor
-				}
+		for (int c = 0; c < tblJugadores.getColumnCount(); c++) {
+			Class<?> col_class = tblJugadores.getColumnClass(c);
+			tblJugadores.setDefaultEditor(col_class, null); // remove editor
+		}
 		refreshTable(lista);
 
 		getContentPane().add(scrollTblJugadores);
@@ -88,14 +94,9 @@ public class frmLogros extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 		}
-	
+
 	}
-	
-	
-	
-        
- 
-	
+
 	public static void refreshTable(ArrayList<jugador> listadoJugadores) {
 
 		if (listadoJugadores.isEmpty())
@@ -108,9 +109,9 @@ public class frmLogros extends JDialog {
 		Object[] arreglo = new String[3];
 
 		for (jugador j : listadoJugadores) {
-			arreglo[0] =  j.numero +"";
-			arreglo[1] =j.respuesta +"";
-			arreglo[2] =  j.tiempo;
+			arreglo[0] = j.numero + "";
+			arreglo[1] = j.respuesta + "";
+			arreglo[2] = j.tiempo;
 
 			modeloJugadores.addRow(arreglo);
 		}

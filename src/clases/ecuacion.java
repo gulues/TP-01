@@ -21,7 +21,6 @@ public class ecuacion {
 					part = "";
 
 					if (cur == '(') {
-						// multiplication between num and bracket
 						_listaEntrada.offer("*");
 					}
 				}
