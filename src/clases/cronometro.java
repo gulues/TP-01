@@ -43,12 +43,8 @@ public class cronometro implements Runnable {
 					seg0 = "0";
 				else
 					seg0 = "";
-				if (cero) {
-					minutos = 0;
-					segundos = 0;
-					horas = 0;
-				}
-				String tiempo = "T: " + hs0 + horas + ":" + min0 + minutos
+				
+				String tiempo =  hs0 + horas + ":" + min0 + minutos
 						+ ":" + seg0 + segundos;
 				frmMain.lblTiempo.setText(tiempo);
 				Thread.sleep(1000);

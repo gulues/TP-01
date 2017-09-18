@@ -37,7 +37,7 @@ public class ecuacion {
 			_listaEntrada.offer(part);
 	}
 
-	public Queue<String> toPostfix() {
+	public Queue<String> analizarFormula() {
 		Queue<String> entrada = new LinkedList<String>();
 		entrada.addAll(_listaEntrada);
 

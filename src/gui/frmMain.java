@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import clases.calculadora;
 import clases.cronometro;
 import clases.ecuacion;
+import clases.jugador;
 import clases.numeros;
 
 import java.awt.Component;
@@ -26,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class frmMain extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -38,6 +40,7 @@ public class frmMain extends JFrame {
 	private static JLabel lblInfo = new JLabel();
 	private static JLabel lblPuntos = new JLabel();
 	private static boolean operaciones = false;
+	private static ArrayList<jugador> lista = new ArrayList<jugador>();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,7 +53,7 @@ public class frmMain extends JFrame {
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
-
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,7 +79,6 @@ public class frmMain extends JFrame {
 		Panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Panel1);
 		Panel1.setLayout(null);
-
 		JLabel lblNumero = new JLabel("Numero: ");
 		lblNumero.setForeground(Color.RED);
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
@@ -115,7 +117,7 @@ public class frmMain extends JFrame {
 		txtFormula.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtFormula.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFormula.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		txtFormula.setText("0");
+		txtFormula.requestFocus();
 		txtFormula.setBounds(47, 184, 349, 40);
 		Panel1.add(txtFormula);
 		txtFormula.setColumns(10);
@@ -163,10 +165,23 @@ public class frmMain extends JFrame {
 			}
 
 		});
-		btnCalcular.setBounds(156, 248, 108, 40);
+		btnCalcular.setBounds(85, 248, 108, 40);
 		Panel1.add(btnCalcular);
 		numRnd = generarNumero() + "";
 		lblNumero.setText("Numero: " + numRnd);
+
+		JButton btnLogros = new JButton("Logros");
+		btnLogros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmLogros f = new frmLogros(lista);
+				f.pack();
+			    f.setLocationRelativeTo(null);
+			    f.setVisible(true);
+			}
+		});
+		btnLogros.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnLogros.setBounds(243, 248, 108, 40);
+		Panel1.add(btnLogros);
 
 	}
 
@@ -195,7 +210,7 @@ public class frmMain extends JFrame {
 			ecu.addInput(txtFormula.getText());
 			cal.addInput(ecu.analizarFormula());
 			String resultado = String.format("%.0f", cal.evaluar());
-
+			jugador j = new jugador("", 0, 0);
 			lblInfo.setText(resultado);
 			if (numRnd.equals(resultado)) {
 				lblInfo.setText("Tu Resultado:" + resultado + " ¡Bien!");
@@ -203,6 +218,10 @@ public class frmMain extends JFrame {
 				lblPuntos.setText("Puntos: " + _puntos);
 				txtFormula.setText("");
 				txtFormula.requestFocus();
+				j.numero = Integer.parseInt(numRnd);
+				j.respuesta = Integer.parseInt(resultado);
+				j.tiempo = lblTiempo.getText();
+				lista.add(j);
 
 			} else {
 				_puntos--;
@@ -210,6 +229,10 @@ public class frmMain extends JFrame {
 						+ " La cuenta no dio");
 				lblPuntos.setText("Puntos: " + _puntos);
 				txtFormula.setText("");
+				j.numero = Integer.parseInt(numRnd);
+				j.respuesta = Integer.parseInt(resultado);
+				j.tiempo = lblTiempo.getText();
+				lista.add(j);
 
 			}
 
