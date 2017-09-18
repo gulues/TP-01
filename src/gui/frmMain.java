@@ -3,24 +3,19 @@ package gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
 import java.awt.Font;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
 import clases.calculadora;
 import clases.cronometro;
 import clases.ecuacion;
 import clases.numeros;
-
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,11 +25,11 @@ import java.awt.event.MouseEvent;
 
 public class frmMain extends JFrame {
 	private static final long serialVersionUID = 1L;
-	public static JLabel lblTiempo= new JLabel("tiempo: ");
+	public static JLabel lblTiempo = new JLabel("tiempo: ");
 	private JPanel Panel1;
 	private JTextField textField;
 	private cronometro crono = new cronometro();
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,7 +41,7 @@ public class frmMain extends JFrame {
 					frame.setResizable(false);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.getContentPane().setLayout(null);
-					
+
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,14 +54,12 @@ public class frmMain extends JFrame {
 	 * Create the frame.
 	 */
 	public frmMain() {
-		
-		
+
 		try {
 			UIManager
 					.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
-				| IllegalAccessException
-				| UnsupportedLookAndFeelException e1) {
+				| IllegalAccessException | UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,8 +107,7 @@ public class frmMain extends JFrame {
 		lblTiempo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblTiempo.setBounds(0, 0, 143, 22);
 		Panel1.add(lblTiempo);
-		
-		
+
 		JLabel lblOperaciones = new JLabel("Operaciones");
 		lblOperaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOperaciones.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -130,67 +122,58 @@ public class frmMain extends JFrame {
 		textField.setBounds(47, 184, 349, 40);
 		Panel1.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel lblInfo = new JLabel("");
 		lblInfo.setForeground(Color.RED);
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInfo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblInfo.setBounds(0, 338, 436, 52);
 		Panel1.add(lblInfo);
-		
+
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		
+
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				if (!(Pattern.matches("^[-+]?[0-9]+([-+*/]+[-+]?[0-9]+)*$", textField.getText()))) {
-//					lblInfo.setText("error de sintaxis");
-//					}
-//					else
-//					{
-						try{
-						calculadora cal= new calculadora();
-						ecuacion ecu= new ecuacion();
-						ecu.addInput(textField.getText());
-						cal.addInput(ecu.toPostfix());
-						
-						
-						lblInfo.setText(String.format("%.1f",cal.evaluate()));
-						if(lblNumero.getText().contains(lblInfo.getText())){
-							JOptionPane.showMessageDialog(Panel1,
-								    "Felicitaciones",
-								    ":)",
-								    JOptionPane.ERROR_MESSAGE);
-							
-						}else{
-							JOptionPane.showMessageDialog(Panel1,
-								    "La cuenta no dio, lo lamentamos!",
-								    ":(",
-								    JOptionPane.ERROR_MESSAGE);
-						}
-							
-						
-							
-						}catch(Exception ex){
-							lblInfo.setText("Error en sintaxis");
-							textField.setText("");
-						}
-//					}
+				// if (!(Pattern.matches("^[-+]?[0-9]+([-+*/]+[-+]?[0-9]+)*$",
+				// textField.getText()))) {
+				// lblInfo.setText("error de sintaxis");
+				// }
+				// else
+				// {
+				try {
+					calculadora cal = new calculadora();
+					ecuacion ecu = new ecuacion();
+					ecu.addInput(textField.getText());
+					cal.addInput(ecu.toPostfix());
+
+					lblInfo.setText(String.format("%.0f", cal.evaluar()));
+					if (lblNumero.getText().contains(lblInfo.getText())) {
+						lblInfo.setText("Bien!");
+						textField.setText("");
+
+					} else {
+						lblInfo.setText("La cuenta no dio");
+						textField.setText("");
+					}
+
+				} catch (Exception ex) {
+					lblInfo.setText("Error en sintaxis");
+					textField.setText("");
+				}
+				// }
 			}
 		});
 		btnCalcular.setBounds(156, 252, 108, 40);
 		Panel1.add(btnCalcular);
-		String numRnd= generarNumero() +"";
-		numRnd=numRnd.replace('.', ',');
-		lblNumero.setText("Numero: " +numRnd);
-		
-		
-		
-		
+		String numRnd = generarNumero() + "";
+		numRnd = numRnd.replace('.', ',');
+		lblNumero.setText("Numero: " + numRnd);
+
 	}
 
 	private int generarNumero() {
-		numeros n= new numeros();
+		numeros n = new numeros();
 		return n.get_numero();
 	}
 }

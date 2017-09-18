@@ -2,8 +2,6 @@ package clases;
 
 import gui.frmMain;
 
-
-
 public class cronometro implements Runnable {
 	public static boolean cero;
 	static int minutos = 0, segundos = 0, horas = 0;
@@ -20,7 +18,6 @@ public class cronometro implements Runnable {
 	}
 
 	public void run() {
-
 		String hs0 = "0", min0 = "0", seg0 = "0";
 		try {
 			while (true) {
@@ -51,8 +48,8 @@ public class cronometro implements Runnable {
 					segundos = 0;
 					horas = 0;
 				}
-				String tiempo = "T: " + hs0 + horas + ":" + min0
-						+ minutos + ":" + seg0 + segundos;
+				String tiempo = "T: " + hs0 + horas + ":" + min0 + minutos
+						+ ":" + seg0 + segundos;
 				frmMain.lblTiempo.setText(tiempo);
 				Thread.sleep(1000);
 			}

@@ -6,72 +6,54 @@ import java.util.Stack;
 
 public class calculadora {
 
-	Queue<String> input= new LinkedList<String>();
+	private Queue<String> _datos = new LinkedList<String>();
 
-	/**
-	 * get a new Postfix equation and separate each part to store into input Queue
-	 * @param postStr
-	 */
-	public void addInput(String postStr) {
-		input.clear();
-		postStr = postStr.trim();
-		/*
-		 * StringTokenizer stk=new StringTokenizer(postString, " ");
-		 * while(stk.hasMoreTokens()) { char c=stk.nextToken().charAt(0);
-		 * if(c!=' ') { input.add(""+c); } }
-		 */
-
-		int idx = 0;
+	public void addInput(String textoEntrada) {
+		_datos.clear();
+		textoEntrada = textoEntrada.trim();
+		int indice = 0;
 		String part = "";
-		while (idx != postStr.length()) {
-			char cur = postStr.charAt(idx);
-
-			if (isOper("" + cur)) {
+		while (indice != textoEntrada.length()) {
+			char caracter = textoEntrada.charAt(indice);
+			if (isOper("" + caracter)) {
 				if (part.length() != 0) {
-					input.add(part);
+					_datos.add(part);
 					part = "";
 				}
 
-				input.add("" + cur);
-			} else if (cur == ' ' && part.length() != 0) {
-				input.add(part);
+				_datos.add("" + caracter);
+			} else if (caracter == ' ' && part.length() != 0) {
+				_datos.add(part);
 				part = "";
-			} else if (cur != ' ') {
-				part += cur;
+			} else if (caracter != ' ') {
+				part += caracter;
 			}
-			idx++;
+			indice++;
 		}
 	}
 
-	public void addInput(Queue<String> q) {
-		input = new LinkedList<String>();
-		input = q;
+	public void addInput(Queue<String> c) {
+		_datos = new LinkedList<String>();
+		_datos = c;
 	}
 
-	/**
-	 * (5-4)*3+4*2 + * 3 - 5 4 * 4 2
-	 * 
-	 * @param oper
-	 * @param sum
-	 * @return
-	 */
-	public double evaluate() {
-		Queue<String> in = new LinkedList<String>();
-		in.addAll(input);
-		Stack<Double> out = new Stack<Double>();
-		while (!in.isEmpty()) {
-			String tmp = in.remove();
+	public double evaluar() {
+		Queue<String> listaEntrada = new LinkedList<String>();
+		listaEntrada.addAll(_datos);
+		Stack<Double> pila = new Stack<Double>();
+		while (!listaEntrada.isEmpty()) {
+			String tmp = listaEntrada.remove();
 			if (isOper(tmp)) {
-				double val1 = out.pop();
-				double val2 = out.pop();
-				out.push(simpleCalc(tmp.charAt(0), val2, val1));
+				double val1 = pila.pop();
+				double val2 = pila.pop();
+				pila.push(simpleCalc(tmp.charAt(0), val2, val1));
 			}
 
 			else {
-				out.push(new Double(tmp));
+				pila.push(new Double(tmp));
 			}
 		}
-		return out.pop();
+		return pila.pop();
 	}
 
 	private boolean isOper(String str) {
@@ -96,6 +78,6 @@ public class calculadora {
 	}
 
 	public String toString() {
-		return input.toString();
+		return _datos.toString();
 	}
 }

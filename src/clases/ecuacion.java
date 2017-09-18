@@ -1,112 +1,99 @@
 package clases;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
 public class ecuacion {
-		Queue<String> input = new LinkedList<String>();
+	private Queue<String> _listaEntrada = new LinkedList<String>();
 
-		/**
-		 * get a new equation and separate each part of the equation to store them into input Queue
-		 * @param infixStr
-		 */
-		public void addInput(String infixStr) {
-			input.clear();
-			infixStr = infixStr.trim();
+	public void addInput(String txtEntrada) {
+		_listaEntrada.clear();
+		txtEntrada = txtEntrada.trim();
+		int indice = 0;
+		String part = "";
+		while (indice != txtEntrada.length()) {
+			char cur = txtEntrada.charAt(indice);
 
-			int idx = 0;
-			String part = "";
-			while (idx != infixStr.length()) {
-				char cur = infixStr.charAt(idx);
+			if (toInt("" + cur) != 2) {
+				if (part.length() != 0) {
+					_listaEntrada.offer(part);
+					part = "";
 
-				if (toInt("" + cur) != 2) {
-					if (part.length() != 0) {
-						input.offer(part);
-						part = "";
-
-						if (cur == '(') {
-							// multiplication between num and bracket
-							input.offer("*");
-						}
+					if (cur == '(') {
+						// multiplication between num and bracket
+						_listaEntrada.offer("*");
 					}
-
-					input.offer("" + cur);
-				} else if (cur != ' ') {
-					part += cur;
-				}
-				idx++;
-			}
-
-			if (part.trim().length() != 0)
-				input.offer(part);
-		}
-
-		public Queue<String> toPostfix() {
-			Queue<String> in = new LinkedList<String>();
-			in.addAll(input);
-
-			Queue<String> out = new LinkedList<String>();
-			Stack<String> operators = new Stack<String>();
-			while (!in.isEmpty()) {
-				String element = in.poll();
-				if (toInt(element) == 2) // number
-				{
-					out.offer(element);
-				} else if (operators.isEmpty()) // if there is no stored operator,
-												// current one is
-				{
-					operators.push(element);
-				} else if (element.equals("(")) // if bracket starts store it
-				{
-					operators.push(element);
-				} else if (element.equals(")")) // if ends
-				{
-					while (!operators.peek().equals("(")) // if it meets the initial
-					{
-						out.offer(operators.pop()); // pop middle parts
-					}
-					operators.pop(); // pop the initial bracket
-				} else {
-					while (!operators.isEmpty() && toInt(operators.peek()) != -3 && 
-							toInt(operators.peek()) >= toInt(element))
-					{
-						out.offer(operators.pop()); // add it to the output
-					}
-
-					operators.push(element);
 				}
 
+				_listaEntrada.offer("" + cur);
+			} else if (cur != ' ') {
+				part += cur;
 			}
-
-			while (!operators.isEmpty())
-				out.offer(operators.pop());
-
-			return out;
+			indice++;
 		}
 
-		/**
-		 * set priority
-		 * @param str
-		 * @return
-		 */
-		private int toInt(String str) {
-			int result;
-			if (str.equals(")") || str.equals("(")) {
-				result = -3;
-			} else if (str.equals("-") || str.equals("+")) {
-				result = -2;
-			} else if (str.equals("*") || str.equals("/")) {
-				result = -1;
-			} else if (str.equals("^")) {
-				result = 0;
-			} else {
-				result = 2;
-			}
-			return result;
-		}
-
-		public String toString() {
-			return input.toString();
-		}
+		if (part.trim().length() != 0)
+			_listaEntrada.offer(part);
 	}
 
+	public Queue<String> toPostfix() {
+		Queue<String> entrada = new LinkedList<String>();
+		entrada.addAll(_listaEntrada);
+
+		Queue<String> salida = new LinkedList<String>();
+		Stack<String> operadores = new Stack<String>();
+		while (!entrada.isEmpty()) {
+			String elem = entrada.poll();
+			if (toInt(elem) == 2) // numeros
+			{
+				salida.offer(elem);
+			} else if (operadores.isEmpty()) // sin no hay una previa operacion
+
+			{
+				operadores.push(elem);
+			} else if (elem.equals("(")) // si tiene parentesis
+			{
+				operadores.push(elem);
+			} else if (elem.equals(")")) {
+				while (!operadores.peek().equals("(")) {
+					salida.offer(operadores.pop());
+				}
+				operadores.pop();
+			} else {
+				while (!operadores.isEmpty() && toInt(operadores.peek()) != -3
+						&& toInt(operadores.peek()) >= toInt(elem)) {
+					salida.offer(operadores.pop());
+				}
+
+				operadores.push(elem);
+			}
+
+		}
+
+		while (!operadores.isEmpty())
+			salida.offer(operadores.pop());
+
+		return salida;
+	}
+
+	private int toInt(String str) {
+		int resultado;
+		if (str.equals(")") || str.equals("(")) {
+			resultado = -3;
+		} else if (str.equals("-") || str.equals("+")) {
+			resultado = -2;
+		} else if (str.equals("*") || str.equals("/")) {
+			resultado = -1;
+		} else if (str.equals("^")) {
+			resultado = 0;
+		} else {
+			resultado = 2;
+		}
+		return resultado;
+	}
+
+	public String toString() {
+		return _listaEntrada.toString();
+	}
+}
