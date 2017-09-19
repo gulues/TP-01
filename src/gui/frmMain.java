@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -77,15 +78,15 @@ public class frmMain extends JFrame {
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Panel1 = new JPanel();
-		Panel1.setBackground(Color.BLACK);
+		Panel1.setBackground(Color.LIGHT_GRAY);
 		Panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(Panel1);
 		Panel1.setLayout(null);
 		JLabel lblNumero = new JLabel("Numero: ");
 		lblNumero.setForeground(Color.RED);
 		lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNumero.setBounds(0, 28, 436, 30);
+		lblNumero.setFont(new Font("Dialog", Font.PLAIN, 29));
+		lblNumero.setBounds(120, 57, 203, 30);
 		Panel1.add(lblNumero);
 
 		txtFormula = new JTextField();
@@ -93,56 +94,57 @@ public class frmMain extends JFrame {
 
 		lblPuntos.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPuntos.setForeground(Color.RED);
-		lblPuntos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblPuntos.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
 		lblPuntos.setBounds(0, 340, 436, 22);
 		Panel1.add(lblPuntos);
 		txtFormula.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtFormula.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFormula.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txtFormula.requestFocus();
+		
 
 		JLabel lblOperaciones = new JLabel("/");
-		lblOperaciones.setForeground(Color.WHITE);
+		lblOperaciones.setForeground(Color.ORANGE);
 		lblOperaciones.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOperaciones.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblOperaciones.setBounds(187, 132, 50, 35);
+		lblOperaciones.setFont(new Font("Dialog", Font.PLAIN, 29));
+		lblOperaciones.setBounds(182, 110, 81, 35);
 		Panel1.add(lblOperaciones);
 
 		JLabel lblTiempoTotal = new JLabel("Tiempo Total:");
 		lblTiempoTotal.setForeground(Color.WHITE);
-		lblTiempoTotal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempoTotal.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
 		lblTiempoTotal.setBounds(0, 0, 81, 22);
 		Panel1.add(lblTiempoTotal);
 		lblTiempo.setForeground(Color.WHITE);
-		lblTiempo.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTiempo.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
 		lblTiempo.setBounds(85, 0, 121, 22);
 		Panel1.add(lblTiempo);
 
-		JLabel lblopDisponibles = new JLabel("Operaciones Disponibles");
+		JLabel lblopDisponibles = new JLabel("Operaciones Disponibles:");
 		lblopDisponibles.setForeground(Color.WHITE);
 		lblopDisponibles.setHorizontalAlignment(SwingConstants.CENTER);
-		lblopDisponibles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblopDisponibles.setBounds(2, 69, 436, 30);
+		lblopDisponibles.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
+		lblopDisponibles.setBounds(0, 83, 436, 30);
 		Panel1.add(lblopDisponibles);
 
-		lblInfo.setForeground(Color.WHITE);
+		lblInfo.setForeground(Color.YELLOW);
 		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblInfo.setBounds(0, 299, 436, 22);
+		lblInfo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblInfo.setBounds(0, 298, 436, 22);
 		Panel1.add(lblInfo);
 		lblTiempoActual.setForeground(Color.WHITE);
 
-		lblTiempoActual.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTiempoActual.setBounds(397, 0, 39, 22);
+		lblTiempoActual.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
+		lblTiempoActual.setBounds(414, 0, 28, 22);
 		Panel1.add(lblTiempoActual);
 
 		JLabel lblTiempo_1 = new JLabel("Tiempo:");
 		lblTiempo_1.setForeground(Color.WHITE);
 		lblTiempo_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTiempo_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTiempo_1.setBounds(286, 0, 108, 22);
+		lblTiempo_1.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
+		lblTiempo_1.setBounds(293, 0, 121, 22);
 		Panel1.add(lblTiempo_1);
-		txtFormula.setBounds(47, 184, 349, 40);
+		txtFormula.setBounds(47, 156, 349, 40);
 		Panel1.add(txtFormula);
 		txtFormula.setColumns(10);
 		crono.setCero(true);
@@ -152,7 +154,7 @@ public class frmMain extends JFrame {
 			lblOperaciones.setText("*   +");
 
 		JButton btnCalcular = new JButton("Calcular");
-		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCalcular.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
 
 		txtFormula.addKeyListener(new KeyAdapter() {
 			@Override
@@ -166,7 +168,7 @@ public class frmMain extends JFrame {
 						else
 							lblOperaciones.setText("*   +");
 					} else
-						lblInfo.setText("La formula tiene que contener los operadores validos");
+						lblInfo.setText("La formula esta incompleta o invalida");
 					if (operaciones)
 						lblOperaciones.setText("/   -");
 					else
@@ -181,7 +183,7 @@ public class frmMain extends JFrame {
 					lblNumero.setText("Numero: " + numRnd);
 
 				} else
-					lblInfo.setText("La formula tiene que contener los operadores validos");
+					lblInfo.setText("La formula esta incompleta o invalida");
 				if (operaciones)
 					lblOperaciones.setText("/   -");
 				else
@@ -189,7 +191,7 @@ public class frmMain extends JFrame {
 			}
 
 		});
-		btnCalcular.setBounds(85, 248, 108, 40);
+		btnCalcular.setBounds(85, 219, 108, 40);
 		Panel1.add(btnCalcular);
 		numRnd = generarNumero() + "";
 		lblNumero.setText("Numero: " + numRnd);
@@ -199,13 +201,24 @@ public class frmMain extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				frmLogros f = new frmLogros(lista);
 				f.pack();
+				f.setTitle("Logros de la partida");
+				f.setBounds(100, 100, 300, 300);
 				f.setLocationRelativeTo(null);
+				f.setResizable(false);
 				f.setVisible(true);
 			}
 		});
-		btnLogros.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnLogros.setBounds(243, 248, 108, 40);
+		btnLogros.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
+		btnLogros.setBounds(239, 219, 108, 40);
 		Panel1.add(btnLogros);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("img\\bg.jpg"));
+		lblNewLabel.setBounds(0, 0, 534, 421);
+		Panel1.add(lblNewLabel);
+		
+		JLabel lbFondo = new JLabel("");
+		lbFondo.setBounds(0, 0, 508, 404);
 
 	}
 
@@ -251,7 +264,7 @@ public class frmMain extends JFrame {
 
 			} else {
 				lblInfo.setForeground(Color.RED);
-				lblInfo.setText("Resultado:" + resultado + " NO ACERTASTE!!");
+				lblInfo.setText("Resultado: " + resultado + " NO ACERTASTE!!");
 				lblPuntos.setText("Puntos: " + _puntos);
 				txtFormula.setText("");
 				j.numero = Integer.parseInt(numRnd);

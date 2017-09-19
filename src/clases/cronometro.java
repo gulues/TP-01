@@ -54,7 +54,11 @@ public class cronometro implements Runnable {
 				String tiempo = hs0 + horas + ":" + min0 + minutos + ":" + seg0
 						+ segundos;
 				frmMain.lblTiempo.setText(tiempo);
-				frmMain.lblTiempoActual.setText(descuento + "");
+				if (descuento<10)
+					frmMain.lblTiempoActual.setText("0"+descuento + "");
+				else
+					frmMain.lblTiempoActual.setText(descuento + "");
+				
 				if (descuento <= 0) {
 					int dialogButton = JOptionPane
 							.showConfirmDialog(
