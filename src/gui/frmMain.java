@@ -64,9 +64,6 @@ public class frmMain extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public frmMain() {
 
 		try {
@@ -101,7 +98,6 @@ public class frmMain extends JFrame {
 		txtFormula.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtFormula.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		txtFormula.requestFocus();
-		
 
 		JLabel lblOperaciones = new JLabel("/");
 		lblOperaciones.setForeground(Color.ORANGE);
@@ -211,12 +207,12 @@ public class frmMain extends JFrame {
 		btnLogros.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
 		btnLogros.setBounds(239, 219, 108, 40);
 		Panel1.add(btnLogros);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("img\\bg.jpg"));
 		lblNewLabel.setBounds(0, 0, 534, 421);
 		Panel1.add(lblNewLabel);
-		
+
 		JLabel lbFondo = new JLabel("");
 		lbFondo.setBounds(0, 0, 508, 404);
 

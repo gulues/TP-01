@@ -70,8 +70,6 @@ public class calculadora {
 			val1 /= val2;
 		} else if (oper == '*') {
 			val1 *= val2;
-		} else if (oper == '^') {
-			val1 = Math.pow(val1, val2);
 		}
 
 		return val1;

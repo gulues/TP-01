@@ -1,10 +1,7 @@
 package clases;
 
-import java.io.Serializable;
+public class jugador {
 
-public class jugador implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 	public String tiempo;
 	public int numero;
 	public int respuesta;

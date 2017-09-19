@@ -84,8 +84,6 @@ public class ecuacion {
 			resultado = -2;
 		} else if (str.equals("*") || str.equals("/")) {
 			resultado = -1;
-		} else if (str.equals("^")) {
-			resultado = 0;
 		} else {
 			resultado = 2;
 		}
