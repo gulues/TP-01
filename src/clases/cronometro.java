@@ -20,7 +20,7 @@ public class cronometro implements Runnable {
 	}
 
 	public void restart() {
-		descuento = 20;
+		descuento = 40;
 	}
 
 	public void run() {
