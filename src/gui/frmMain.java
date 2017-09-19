@@ -35,7 +35,7 @@ public class frmMain extends JFrame {
 	public static JLabel lblTiempoActual = new JLabel("tiempo: ");
 	private JPanel Panel1;
 	private JTextField txtFormula;
-	private cronometro cronoT = new cronometro();
+	private cronometro crono = new cronometro();
 	private static int _puntos = 0;
 	String numRnd;
 	private static JLabel lblInfo = new JLabel();
@@ -145,7 +145,7 @@ public class frmMain extends JFrame {
 		txtFormula.setBounds(47, 184, 349, 40);
 		Panel1.add(txtFormula);
 		txtFormula.setColumns(10);
-		cronoT.setCero(true);
+		crono.setCero(true);
 		if (operaciones)
 			lblOperaciones.setText("/   -");
 		else
@@ -247,7 +247,7 @@ public class frmMain extends JFrame {
 				j.respuesta = Integer.parseInt(resultado);
 				j.tiempo = lblTiempo.getText();
 				lista.add(j);
-				cronoT.restart();
+				crono.restart();
 
 			} else {
 				lblInfo.setForeground(Color.RED);
@@ -258,7 +258,7 @@ public class frmMain extends JFrame {
 				j.respuesta = Integer.parseInt(resultado);
 				j.tiempo = lblTiempo.getText();
 				lista.add(j);
-				cronoT.restart();
+				crono.restart();
 			}
 
 		} catch (Exception ex) {
